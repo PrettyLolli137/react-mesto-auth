@@ -35,7 +35,7 @@ function Register({ onRegister }) {
             name="email"
             type="email"
             placeholder="Email"
-            value={values.email ? values.name : ""}
+            value={values.email || ""}
             onChange={handleChange}
             onClose={resetClose}
           />
@@ -54,7 +54,7 @@ function Register({ onRegister }) {
             type="password"
             placeholder="Пароль"
             minLength="8"
-            value={values.password ? values.password : ""}
+            value={values.password || ""}
             onChange={handleChange}
           />
           <span className="authorization__error authorization__error_visible">

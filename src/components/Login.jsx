@@ -30,7 +30,7 @@ function resetClose(){
             name="email"
             type="email"
             placeholder="Email"
-            value={values.email ? values.name : ''}
+            value={values.email || ""}
             onChange={handleChange}
             onClose={resetClose}
           />
@@ -47,7 +47,7 @@ function resetClose(){
             type="password"
             placeholder="Пароль"
             minLength="8"
-            value={values.password ? values.password : ''}
+            value={values.password || ""}
             onChange={handleChange}
 
           />

@@ -101,6 +101,7 @@ useEffect(() => {
 
   useEffect(() => {
    // setIsLoadingGif(true)
+   if (loggedIn) {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([resData, resCardInfo]) => {
         setCurrentUser(resData);
@@ -108,7 +109,8 @@ useEffect(() => {
      //   setIsLoadingGif(false)
       })
       .catch((err) => console.log(`Что-то пошло не так: ${err}`));
-  }, []);
+    }
+    }, [loggedIn]);
 
 
 
@@ -159,7 +161,7 @@ useEffect(() => {
     .catch((err) => console.log(`Что-то пошло не так: ${err}`));
 }
 
-
+//Обработка запроса на регистрацию
 function handleRegister(email,password){
   register(email, password)
   .then((res) => {
