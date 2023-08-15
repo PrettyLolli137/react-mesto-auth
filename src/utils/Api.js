@@ -23,7 +23,6 @@ class Api {
         return this._request(`${this._baseUrl}/users/me`, {
             headers: { authorization: this._authorization }
         })
-            .then(this._checkResponse);
     }
 
     // Редактирование информации о пользователе
@@ -36,7 +35,6 @@ class Api {
                 about: data.job,
             })
         })
-            .then(this._checkResponse);
     }
 
     // Изменение аватара пользователя
@@ -48,7 +46,6 @@ class Api {
                 avatar: data.avatar,
             })
         })
-            .then(this._checkResponse);
     }
 
     // Получение списка карточек
@@ -56,7 +53,6 @@ class Api {
         return this._request(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-            .then(this._checkResponse);
     }
 
     // Добавление новой карточки
@@ -69,7 +65,6 @@ class Api {
                 link: cardInfo.link,
             })
         })
-            .then(this._checkResponse);
     }
 
     // Удаление карточки
@@ -78,7 +73,6 @@ class Api {
             method: 'DELETE',
             headers: { authorization: this._authorization }
         })
-            .then(this._checkResponse);
     }
 
     // Поставить лайк карточке
@@ -87,7 +81,6 @@ class Api {
             method: 'PUT',
             headers: { authorization: this._authorization }
         })
-            .then(this._checkResponse);
     }
 
     // Убрать лайк с карточки
@@ -96,7 +89,6 @@ class Api {
             method: 'DELETE',
             headers: { authorization: this._authorization }
         })
-            .then(this._checkResponse);
     }
 
 }
