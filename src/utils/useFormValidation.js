@@ -1,6 +1,4 @@
-
 import { useCallback, useState } from "react";
-
 
 function useFormValidation(){
     const [values, setValues ] = useState({});
@@ -30,7 +28,6 @@ return {...oldValues, [name]: value, }
 
                     setIsValid(form.checkValidity())
 }
-
 // возвращение всех значений
 function reset(data = {}){
     setValues(data)
@@ -44,7 +41,6 @@ const setValue = useCallback((name, value) => {
         return {...oldValues, [name]: value, }
             })
 }, [])
-
 
 return {values,errors,isValid,isInputValid,setValue,reset, handleChange}
 }

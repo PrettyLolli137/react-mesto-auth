@@ -1,30 +1,34 @@
 import React from "react";
 import useFormValidation from "../utils/useFormValidation";
 
-function Login({onLogin}){
+function Login({ onLogin }) {
+  const { values, errors, isValid, isInputValid, reset, handleChange } =
+    useFormValidation();
 
-    const {values,errors,isValid,isInputValid,reset, handleChange} = useFormValidation();
-
-function resetClose(){
-    reset()
+  function resetClose() {
+    reset();
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(values.email, values.password)
-  }
+    onLogin(values.email, values.password);
+  };
 
   return (
     <main className="content">
       <div className="authorization">
         <p className="authorization__welcome">Вход</p>
-        <form className="authorization__form form" onSubmit={handleSubmit} noValidate>
+        <form
+          className="authorization__form form"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <input
             className={`authorization__input ${
-                isInputValid.email === undefined || isInputValid.email
-                  ? ""
-                  : "authorization__input_valid_error"
-              } `}
+              isInputValid.email === undefined || isInputValid.email
+                ? ""
+                : "authorization__input_valid_error"
+            } `}
             required
             id="email"
             name="email"
@@ -34,13 +38,15 @@ function resetClose(){
             onChange={handleChange}
             onClose={resetClose}
           />
-          <span className="authorization__error authorization__error_visible">{errors.email}</span>
+          <span className="authorization__error authorization__error_visible">
+            {errors.email}
+          </span>
           <input
             className={`authorization__input ${
-                isInputValid.password === undefined || isInputValid.password
-                  ? ""
-                  : "authorization__input_valid_error"
-              } `}
+              isInputValid.password === undefined || isInputValid.password
+                ? ""
+                : "authorization__input_valid_error"
+            } `}
             required
             id="password"
             name="password"
@@ -49,14 +55,17 @@ function resetClose(){
             minLength="8"
             value={values.password || ""}
             onChange={handleChange}
-
           />
-          <span className="authorization__error authorization__error_visible">{errors.password}</span>
+          <span className="authorization__error authorization__error_visible">
+            {errors.password}
+          </span>
           <div className="authorization__button-container">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className={
-                isValid ? "authorization__button" : "authorization__button authorization__button_disabled"
+                isValid
+                  ? "authorization__button"
+                  : "authorization__button authorization__button_disabled"
               }
               disabled={!isValid}
             >
@@ -67,8 +76,6 @@ function resetClose(){
       </div>
     </main>
   );
-
 }
-
 
 export default Login;

@@ -9,9 +9,9 @@ function Header({ onLogout, email }) {
   //const [menu, setMenu] = useState(false);
   const [scroll, setScroll] = useState(0);
 
- // function handleOpenMenu() {
- //   setMenu(!menu);
- // }
+  // function handleOpenMenu() {
+  //   setMenu(!menu);
+  // }
 
   function handleScroll() {
     setScroll(window.scrollY);
@@ -22,8 +22,6 @@ function Header({ onLogout, email }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-
 
   return (
     <header className="header">
@@ -43,9 +41,9 @@ function Header({ onLogout, email }) {
 
       {location.pathname === "/" && (
         <>
-         <div
+          <div
             className={
-               !scroll
+              !scroll
                 ? "header__element header__element_active"
                 : "header__element"
             }
@@ -59,7 +57,6 @@ function Header({ onLogout, email }) {
               Выйти
             </Link>
           </div>
-         
         </>
       )}
     </header>
@@ -77,19 +74,12 @@ function Header() {
     );
 }
 
-
-
-
-
-
 import burger from "../images/burger.svg";
 import closeBtn from "../images/close-burger-menu.svg";
 
 function handleOpenMenu() {
     setMenu(!menu);
   }
-
-
 
 header className={menu && !scroll ? "header header_active" : "header"}>
   <div
@@ -99,7 +89,6 @@ header className={menu && !scroll ? "header header_active" : "header"}>
                 : "header__element"
             }
           >
-
  <div
             onClick={handleOpenMenu}
             className={

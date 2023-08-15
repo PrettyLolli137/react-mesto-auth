@@ -43,11 +43,11 @@ function Register({ onRegister }) {
             {errors.email}
           </span>
           <input
-              className={`authorization__input ${
-                isInputValid.password === undefined || isInputValid.password
-                  ? ""
-                  : "authorization__input_valid_error"
-              } `}
+            className={`authorization__input ${
+              isInputValid.password === undefined || isInputValid.password
+                ? ""
+                : "authorization__input_valid_error"
+            } `}
             required
             id="password"
             name="password"

@@ -14,9 +14,13 @@ class Api {
         }
     }
 
+    _request(url, options) {
+        return fetch(url, options).then(this._checkResponse)
+      }
+
     // Получение информации о пользователе
     getUserInfo() {
-        return fetch(`${this._baseUrl}/users/me`, {
+        return this._request(`${this._baseUrl}/users/me`, {
             headers: { authorization: this._authorization }
         })
             .then(this._checkResponse);
@@ -24,7 +28,7 @@ class Api {
 
     // Редактирование информации о пользователе
     setUserInfo(data) {
-        return fetch(`${this._baseUrl}/users/me`, {
+        return this._request(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -37,7 +41,7 @@ class Api {
 
     // Изменение аватара пользователя
     updateUserAvatar(data) {
-        return fetch(`${this._baseUrl}/users/me/avatar`, {
+        return this._request(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -49,7 +53,7 @@ class Api {
 
     // Получение списка карточек
     getInitialCards() {
-        return fetch(`${this._baseUrl}/cards`, {
+        return this._request(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
             .then(this._checkResponse);
@@ -57,7 +61,7 @@ class Api {
 
     // Добавление новой карточки
     addCard(cardInfo) {
-        return fetch(`${this._baseUrl}/cards`, {
+        return this._request(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -70,7 +74,7 @@ class Api {
 
     // Удаление карточки
     deleteCard(cardId) {
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+        return this._request(`${this._baseUrl}/cards/${cardId}`, {
             method: 'DELETE',
             headers: { authorization: this._authorization }
         })
@@ -79,7 +83,7 @@ class Api {
 
     // Поставить лайк карточке
     likeCard(cardId) {
-        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return this._request(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'PUT',
             headers: { authorization: this._authorization }
         })
@@ -88,7 +92,7 @@ class Api {
 
     // Убрать лайк с карточки
     unlikeCard(cardId) {
-        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return this._request(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'DELETE',
             headers: { authorization: this._authorization }
         })
