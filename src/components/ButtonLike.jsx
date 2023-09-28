@@ -6,7 +6,7 @@ function ButtonLike({ likes, myid, cardid }) {
   const [likeCount, setLikeCount] = useState(likes.length);
 
   useEffect(() => {
-    setIsLike(likes.some((element) => myid === element._id));
+    setIsLike(likes.some((element) => myid === element));
   }, [likes, myid]);
 
   function handleLikeClick() {
@@ -41,3 +41,9 @@ function ButtonLike({ likes, myid, cardid }) {
 }
 
 export default ButtonLike;
+
+/*
+setIsLike(likes.some((element) => myid === element._id));
+
+
+*/

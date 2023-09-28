@@ -17,7 +17,7 @@ function Card({ card, onCardClick, onDeleteCard }) {
         alt={`Изображение ${card.name}`}
         onClick={handleCardClick}
       />
-      {currentUser._id === card.owner._id && (
+      {currentUser._id === card.owner && (
         <button
           className="groups__deletebtn"
           type="button"
@@ -38,3 +38,5 @@ function Card({ card, onCardClick, onDeleteCard }) {
 }
 
 export default Card;
+
+// {currentUser._id === card.owner._id && (

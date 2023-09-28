@@ -25,7 +25,6 @@ function App() {
   const [isDeletePopup, setDeleteCardPopup] = useState(false);
   const [isImagePopup, setImagePopup] = useState(false);
   // const [isPreRender, setIsPreRender] = useState(false)
-
   // стейт контекста
   const [currentUser, setCurrentUser] = useState({});
 
@@ -46,6 +45,7 @@ function App() {
 
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     // если у пользователя есть токен в localStorage,
@@ -55,7 +55,7 @@ function App() {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            setEmail(res.data.email);
+            setEmail(res.email);
             navigate("/", { replace: true });
           }
         })
@@ -100,7 +100,6 @@ function App() {
   }
 
   useEffect(() => {
-    // setIsLoadingGif(true)
     if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
         .then(([resData, resCardInfo]) => {
@@ -161,6 +160,10 @@ function App() {
       })
       .catch(console.error);
   }
+  
+
+
+
 
   //Обработка запроса на регистрацию
   function handleRegister(email, password) {

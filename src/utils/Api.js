@@ -1,8 +1,8 @@
 class Api {
     constructor(options) {
         this._baseUrl = options.baseUrl;
-        this._headers = options.headers;
-        this._authorization = options.headers.authorization
+      //  this._headers = options.headers;
+      //  this._authorization = options.headers.authorization
     }
 
     // Приватный метод для проверки ответа сервера
@@ -21,7 +21,10 @@ class Api {
     // Получение информации о пользователе
     getUserInfo() {
         return this._request(`${this._baseUrl}/users/me`, {
-            headers: { authorization: this._authorization }
+            headers: { 
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+               // authorization: this._authorization 
+            }
         })
     }
 
@@ -29,7 +32,10 @@ class Api {
     setUserInfo(data) {
         return this._request(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              },
             body: JSON.stringify({
                 name: data.username,
                 about: data.job,
@@ -41,7 +47,10 @@ class Api {
     updateUserAvatar(data) {
         return this._request(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
-            headers: this._headers,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              },
             body: JSON.stringify({
                 avatar: data.avatar,
             })
@@ -51,7 +60,9 @@ class Api {
     // Получение списка карточек
     getInitialCards() {
         return this._request(`${this._baseUrl}/cards`, {
-            headers: this._headers
+            headers:{
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            } 
         })
     }
 
@@ -59,7 +70,10 @@ class Api {
     addCard(cardInfo) {
         return this._request(`${this._baseUrl}/cards`, {
             method: 'POST',
-            headers: this._headers,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              },
             body: JSON.stringify({
                 name: cardInfo.name,
                 link: cardInfo.link,
@@ -71,35 +85,47 @@ class Api {
     deleteCard(cardId) {
         return this._request(`${this._baseUrl}/cards/${cardId}`, {
             method: 'DELETE',
-            headers: { authorization: this._authorization }
+            headers: {   'Authorization': `Bearer ${localStorage.getItem('token')}`
+         }
         })
     }
 
+// return this._request(`${this._baseUrl}/cards/${cardId}`
+
     // Поставить лайк карточке
     likeCard(cardId) {
-        return this._request(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: 'PUT',
-            headers: { authorization: this._authorization }
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
     }
 
     // Убрать лайк с карточки
     unlikeCard(cardId) {
-        return this._request(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: 'DELETE',
-            headers: { authorization: this._authorization }
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         })
     }
 
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
-    headers: {
-        authorization: '306be11b-c38b-4424-b7d8-096b26b89e4b',
-        'Content-Type': 'application/json'
-    }
+    baseUrl: "http://localhost:3000",
+    // 'https://mesto.nomoreparties.co/v1/cohort-69',
 });
 
+//  headers: {
+ //   authorization: '306be11b-c38b-4424-b7d8-096b26b89e4b',
+ //   'Content-Type': 'application/json'
+// }
 export default api;
 
+/*
+  likeCard(cardId) {
+    return this._request(`${this._baseUrl}/cards/likes/${cardId}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
+}
+*/
